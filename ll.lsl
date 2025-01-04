@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Layout version="1.6.1">
   <Mode>Vertical</Mode>
-  <X>685</X>
-  <Y>47</Y>
+  <X>153</X>
+  <Y>45</Y>
   <VerticalWidth>252</VerticalWidth>
-  <VerticalHeight>287</VerticalHeight>
+  <VerticalHeight>318</VerticalHeight>
   <HorizontalWidth>-1</HorizontalWidth>
   <HorizontalHeight>-1</HorizontalHeight>
   <Settings>
@@ -48,32 +48,15 @@
         <Reset>True</Reset>
         <Split>True</Split>
         <CustomSettings>
-          <Setting id="mission1" type="bool">True</Setting>
-          <Setting id="mission2" type="bool">True</Setting>
-          <Setting id="mission3" type="bool">True</Setting>
-          <Setting id="mission4" type="bool">True</Setting>
-          <Setting id="mission5" type="bool">True</Setting>
-          <Setting id="mission6" type="bool">True</Setting>
-          <Setting id="mission7" type="bool">True</Setting>
+          <Setting id="ch1" type="bool">True</Setting>
+          <Setting id="ch2" type="bool">False</Setting>
+          <Setting id="ch3" type="bool">False</Setting>
+          <Setting id="ch4" type="bool">False</Setting>
+          <Setting id="ch5" type="bool">False</Setting>
+          <Setting id="ch6" type="bool">False</Setting>
+          <Setting id="ch7" type="bool">False</Setting>
+          <Setting id="ch8" type="bool">False</Setting>
         </CustomSettings>
-      </Settings>
-    </Component>
-    <Component>
-      <Path>LiveSplit.Timer.dll</Path>
-      <Settings>
-        <Version>1.5</Version>
-        <TimerHeight>50</TimerHeight>
-        <TimerWidth>225</TimerWidth>
-        <TimerFormat>1.23</TimerFormat>
-        <OverrideSplitColors>False</OverrideSplitColors>
-        <ShowGradient>True</ShowGradient>
-        <TimerColor>FFAAAAAA</TimerColor>
-        <BackgroundColor>00FFFFFF</BackgroundColor>
-        <BackgroundColor2>00FFFFFF</BackgroundColor2>
-        <BackgroundGradient>Plain</BackgroundGradient>
-        <CenterTimer>False</CenterTimer>
-        <TimingMethod>Game Time</TimingMethod>
-        <DecimalsSize>35</DecimalsSize>
       </Settings>
     </Component>
     <Component>
@@ -88,7 +71,7 @@
         <ShowThinSeparators>True</ShowThinSeparators>
         <AlwaysShowLastSplit>True</AlwaysShowLastSplit>
         <SplitWidth>20</SplitWidth>
-        <SplitTimesAccuracy>Seconds</SplitTimesAccuracy>
+        <SplitTimesAccuracy>Hundredths</SplitTimesAccuracy>
         <AutomaticAbbreviations>False</AutomaticAbbreviations>
         <BeforeNamesColor>FFFFFFFF</BeforeNamesColor>
         <CurrentNamesColor>FFFFFFFF</CurrentNamesColor>
@@ -131,6 +114,42 @@
             <TimingMethod>Current Timing Method</TimingMethod>
           </Settings>
         </Columns>
+      </Settings>
+    </Component>
+    <Component>
+      <Path>LiveSplit.ComparisonTime.dll</Path>
+      <Settings>
+        <Version>1.4</Version>
+        <TextColor>FFFFFFFF</TextColor>
+        <OverrideTextColor>False</OverrideTextColor>
+        <TimeColor>FFFFFFFF</TimeColor>
+        <OverrideTimeColor>False</OverrideTimeColor>
+        <Accuracy>Hundredths</Accuracy>
+        <BackgroundColor>00FFFFFF</BackgroundColor>
+        <BackgroundColor2>00FFFFFF</BackgroundColor2>
+        <BackgroundGradient>Plain</BackgroundGradient>
+        <Comparison>Best Segments</Comparison>
+        <TimingMethod>Current Timing Method</TimingMethod>
+        <Display2Rows>False</Display2Rows>
+        <Type>SplitTime</Type>
+      </Settings>
+    </Component>
+    <Component>
+      <Path>LiveSplit.Timer.dll</Path>
+      <Settings>
+        <Version>1.5</Version>
+        <TimerHeight>50</TimerHeight>
+        <TimerWidth>225</TimerWidth>
+        <TimerFormat>1.23</TimerFormat>
+        <OverrideSplitColors>False</OverrideSplitColors>
+        <ShowGradient>True</ShowGradient>
+        <TimerColor>FFAAAAAA</TimerColor>
+        <BackgroundColor>00FFFFFF</BackgroundColor>
+        <BackgroundColor2>00FFFFFF</BackgroundColor2>
+        <BackgroundGradient>Plain</BackgroundGradient>
+        <CenterTimer>False</CenterTimer>
+        <TimingMethod>Game Time</TimingMethod>
+        <DecimalsSize>35</DecimalsSize>
       </Settings>
     </Component>
   </Components>
