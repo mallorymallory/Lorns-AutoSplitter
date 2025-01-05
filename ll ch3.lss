@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Run version="1.7.0">
+  <GameIcon />
+  <GameName>Lorn's Lure Ch3</GameName>
+  <CategoryName>Any%</CategoryName>
+  <LayoutPath>
+  </LayoutPath>
+  <Metadata>
+    <Run id="" />
+    <Platform usesEmulator="False">
+    </Platform>
+    <Region>
+    </Region>
+    <Variables />
+  </Metadata>
+  <Offset>00:00:00</Offset>
+  <AttemptCount>20</AttemptCount>
+  <AttemptHistory>
+    <Attempt id="1" started="01/04/2025 21:28:37" isStartedSynced="True" ended="01/04/2025 21:28:43" isEndedSynced="True" />
+    <Attempt id="2" started="01/04/2025 21:28:43" isStartedSynced="True" ended="01/04/2025 21:28:47" isEndedSynced="True" />
+    <Attempt id="3" started="01/04/2025 21:28:47" isStartedSynced="True" ended="01/04/2025 21:29:04" isEndedSynced="True" />
+    <Attempt id="4" started="01/04/2025 21:29:04" isStartedSynced="True" ended="01/04/2025 21:38:36" isEndedSynced="True" />
+    <Attempt id="5" started="01/04/2025 21:38:36" isStartedSynced="True" ended="01/04/2025 21:39:24" isEndedSynced="True" />
+    <Attempt id="6" started="01/04/2025 21:39:24" isStartedSynced="True" ended="01/04/2025 21:40:10" isEndedSynced="True" />
+    <Attempt id="7" started="01/04/2025 21:40:10" isStartedSynced="True" ended="01/04/2025 21:46:15" isEndedSynced="True" />
+    <Attempt id="8" started="01/04/2025 21:46:15" isStartedSynced="True" ended="01/04/2025 21:54:18" isEndedSynced="True" />
+    <Attempt id="9" started="01/04/2025 21:54:18" isStartedSynced="True" ended="01/04/2025 21:54:24" isEndedSynced="True" />
+    <Attempt id="10" started="01/04/2025 21:54:24" isStartedSynced="True" ended="01/04/2025 21:54:41" isEndedSynced="True" />
+    <Attempt id="11" started="01/04/2025 21:54:41" isStartedSynced="True" ended="01/04/2025 21:55:33" isEndedSynced="True" />
+    <Attempt id="12" started="01/04/2025 21:55:33" isStartedSynced="True" ended="01/04/2025 21:57:16" isEndedSynced="True" />
+    <Attempt id="13" started="01/04/2025 21:57:16" isStartedSynced="True" ended="01/04/2025 21:59:06" isEndedSynced="True" />
+    <Attempt id="14" started="01/04/2025 21:59:06" isStartedSynced="True" ended="01/04/2025 21:59:10" isEndedSynced="True" />
+    <Attempt id="15" started="01/04/2025 21:59:10" isStartedSynced="True" ended="01/04/2025 21:59:27" isEndedSynced="True" />
+    <Attempt id="16" started="01/04/2025 21:59:27" isStartedSynced="True" ended="01/04/2025 22:02:05" isEndedSynced="True" />
+    <Attempt id="17" started="01/05/2025 02:43:00" isStartedSynced="True" ended="01/05/2025 02:43:06" isEndedSynced="True" />
+    <Attempt id="18" started="01/05/2025 02:43:06" isStartedSynced="True" ended="01/05/2025 02:43:12" isEndedSynced="True" />
+    <Attempt id="19" started="01/05/2025 02:43:12" isStartedSynced="True" ended="01/05/2025 02:43:30" isEndedSynced="True" />
+    <Attempt id="20" started="01/05/2025 02:43:30" isStartedSynced="True" ended="01/05/2025 02:48:03" isEndedSynced="True">
+      <RealTime>00:04:33.1895287</RealTime>
+      <GameTime>00:04:33.1895287</GameTime>
+    </Attempt>
+  </AttemptHistory>
+  <Segments>
+    <Segment>
+      <Name>intro</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best">
+          <RealTime>00:01:02.9110133</RealTime>
+          <GameTime>00:01:02.9110133</GameTime>
+        </SplitTime>
+      </SplitTimes>
+      <BestSegmentTime>
+        <RealTime>00:00:54.5322363</RealTime>
+        <GameTime>00:00:54.5322363</GameTime>
+      </BestSegmentTime>
+      <SegmentHistory>
+        <Time id="4">
+          <RealTime>00:00:54.5322363</RealTime>
+          <GameTime>00:00:54.5322363</GameTime>
+        </Time>
+        <Time id="8">
+          <RealTime>00:00:57.7443115</RealTime>
+          <GameTime>00:00:57.7443115</GameTime>
+        </Time>
+        <Time id="20">
+          <RealTime>00:01:02.9110133</RealTime>
+          <GameTime>00:01:02.9110133</GameTime>
+        </Time>
+      </SegmentHistory>
+    </Segment>
+    <Segment>
+      <Name>slide and jump</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best">
+          <RealTime>00:02:19.6210326</RealTime>
+          <GameTime>00:02:19.6210326</GameTime>
+        </SplitTime>
+      </SplitTimes>
+      <BestSegmentTime>
+        <RealTime>00:01:16.7100193</RealTime>
+        <GameTime>00:01:16.7100193</GameTime>
+      </BestSegmentTime>
+      <SegmentHistory>
+        <Time id="4">
+          <RealTime>00:01:29.1645573</RealTime>
+          <GameTime>00:01:29.1645573</GameTime>
+        </Time>
+        <Time id="8">
+          <RealTime>00:01:20.2741533</RealTime>
+          <GameTime>00:01:20.2741533</GameTime>
+        </Time>
+        <Time id="20">
+          <RealTime>00:01:16.7100193</RealTime>
+          <GameTime>00:01:16.7100193</GameTime>
+        </Time>
+      </SegmentHistory>
+    </Segment>
+    <Segment>
+      <Name>chase</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best">
+          <RealTime>00:03:44.1692729</RealTime>
+          <GameTime>00:03:44.1692729</GameTime>
+        </SplitTime>
+      </SplitTimes>
+      <BestSegmentTime>
+        <RealTime>00:01:24.5482403</RealTime>
+        <GameTime>00:01:24.5482403</GameTime>
+      </BestSegmentTime>
+      <SegmentHistory>
+        <Time id="4">
+          <RealTime>00:05:42.5055255</RealTime>
+          <GameTime>00:05:42.5055255</GameTime>
+        </Time>
+        <Time id="20">
+          <RealTime>00:01:24.5482403</RealTime>
+          <GameTime>00:01:24.5482403</GameTime>
+        </Time>
+      </SegmentHistory>
+    </Segment>
+    <Segment>
+      <Name>the rest</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best">
+          <RealTime>00:04:33.1895287</RealTime>
+          <GameTime>00:04:33.1895287</GameTime>
+        </SplitTime>
+      </SplitTimes>
+      <BestSegmentTime>
+        <RealTime>00:00:49.0202558</RealTime>
+        <GameTime>00:00:49.0202558</GameTime>
+      </BestSegmentTime>
+      <SegmentHistory>
+        <Time id="20">
+          <RealTime>00:00:49.0202558</RealTime>
+          <GameTime>00:00:49.0202558</GameTime>
+        </Time>
+      </SegmentHistory>
+    </Segment>
+  </Segments>
+  <AutoSplitterSettings />
+</Run>

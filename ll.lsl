@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Layout version="1.6.1">
   <Mode>Vertical</Mode>
-  <X>153</X>
-  <Y>45</Y>
+  <X>21</X>
+  <Y>8</Y>
   <VerticalWidth>252</VerticalWidth>
-  <VerticalHeight>318</VerticalHeight>
+  <VerticalHeight>314</VerticalHeight>
   <HorizontalWidth>-1</HorizontalWidth>
   <HorizontalHeight>-1</HorizontalHeight>
   <Settings>
@@ -56,6 +56,8 @@
           <Setting id="ch6" type="bool">False</Setting>
           <Setting id="ch7" type="bool">False</Setting>
           <Setting id="ch8" type="bool">False</Setting>
+          <Setting id="logging" type="bool">False</Setting>
+          <Setting id="notifications" type="bool">True</Setting>
         </CustomSettings>
       </Settings>
     </Component>
@@ -82,11 +84,11 @@
         <AfterTimesColor>FFFFFFFF</AfterTimesColor>
         <OverrideTimesColor>False</OverrideTimesColor>
         <ShowBlankSplits>True</ShowBlankSplits>
-        <LockLastSplit>True</LockLastSplit>
-        <IconSize>24</IconSize>
+        <LockLastSplit>False</LockLastSplit>
+        <IconSize>10</IconSize>
         <IconShadows>True</IconShadows>
         <SplitHeight>3.6</SplitHeight>
-        <CurrentSplitGradient>Vertical</CurrentSplitGradient>
+        <CurrentSplitGradient>Plain</CurrentSplitGradient>
         <BackgroundColor>00FFFFFF</BackgroundColor>
         <BackgroundColor2>01FFFFFF</BackgroundColor2>
         <BackgroundGradient>Alternating</BackgroundGradient>
