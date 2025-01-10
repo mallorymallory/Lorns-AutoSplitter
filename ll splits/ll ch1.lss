@@ -3,7 +3,8 @@
   <GameIcon />
   <GameName>Lorn's Lure Ch1</GameName>
   <CategoryName>Any%</CategoryName>
-  <LayoutPath>C:\Users\Mallory\Downloads\LiveSplit_1.8.29\ll.lsl</LayoutPath>
+  <LayoutPath>
+  </LayoutPath>
   <Metadata>
     <Run id="" />
     <Platform usesEmulator="False">
@@ -13,7 +14,7 @@
     <Variables />
   </Metadata>
   <Offset>00:00:00</Offset>
-  <AttemptCount>21</AttemptCount>
+  <AttemptCount>0</AttemptCount>
   <AttemptHistory>
     <Attempt id="1" started="01/02/2025 01:00:56" isStartedSynced="False" ended="01/02/2025 01:02:21" isEndedSynced="True" />
     <Attempt id="2" started="01/02/2025 03:34:45" isStartedSynced="True" ended="01/02/2025 03:35:32" isEndedSynced="True" />

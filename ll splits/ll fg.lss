@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Run version="1.7.0">
+  <GameIcon />
+  <GameName>Lorn's Lure Full Game Basic</GameName>
+  <CategoryName>Any%</CategoryName>
+  <LayoutPath>
+  </LayoutPath>
+  <Metadata>
+    <Run id="" />
+    <Platform usesEmulator="False">
+    </Platform>
+    <Region>
+    </Region>
+    <Variables />
+  </Metadata>
+  <Offset>00:00:00</Offset>
+  <AttemptCount>24</AttemptCount>
+  <AttemptHistory>
+    <Attempt id="1" started="01/09/2025 03:57:48" isStartedSynced="True" ended="01/09/2025 03:58:10" isEndedSynced="True" />
+    <Attempt id="2" started="01/09/2025 03:58:10" isStartedSynced="True" ended="01/09/2025 04:07:41" isEndedSynced="True" />
+    <Attempt id="3" started="01/09/2025 04:07:41" isStartedSynced="True" ended="01/09/2025 04:10:53" isEndedSynced="True" />
+    <Attempt id="4" started="01/09/2025 04:10:53" isStartedSynced="True" ended="01/09/2025 04:11:32" isEndedSynced="True" />
+    <Attempt id="5" started="01/09/2025 04:11:32" isStartedSynced="True" ended="01/09/2025 04:34:00" isEndedSynced="True" />
+    <Attempt id="6" started="01/09/2025 04:34:00" isStartedSynced="True" ended="01/09/2025 04:48:45" isEndedSynced="True" />
+    <Attempt id="7" started="01/09/2025 04:48:46" isStartedSynced="True" ended="01/09/2025 04:56:32" isEndedSynced="True" />
+    <Attempt id="8" started="01/09/2025 04:56:32" isStartedSynced="True" ended="01/09/2025 05:04:38" isEndedSynced="True" />
+    <Attempt id="9" started="01/09/2025 05:04:38" isStartedSynced="True" ended="01/09/2025 05:04:54" isEndedSynced="True" />
+    <Attempt id="10" started="01/09/2025 05:04:54" isStartedSynced="True" ended="01/09/2025 05:13:01" isEndedSynced="True" />
+    <Attempt id="11" started="01/09/2025 05:13:01" isStartedSynced="True" ended="01/09/2025 05:14:09" isEndedSynced="True" />
+    <Attempt id="12" started="01/09/2025 05:14:09" isStartedSynced="True" ended="01/09/2025 05:14:15" isEndedSynced="True" />
+    <Attempt id="13" started="01/09/2025 05:14:15" isStartedSynced="True" ended="01/09/2025 05:19:17" isEndedSynced="True" />
+    <Attempt id="14" started="01/09/2025 05:19:17" isStartedSynced="True" ended="01/09/2025 05:38:12" isEndedSynced="True" />
+    <Attempt id="15" started="01/09/2025 05:38:13" isStartedSynced="True" ended="01/09/2025 05:38:46" isEndedSynced="True" />
+    <Attempt id="16" started="01/09/2025 05:38:46" isStartedSynced="True" ended="01/09/2025 05:38:50" isEndedSynced="True" />
+    <Attempt id="17" started="01/09/2025 05:38:50" isStartedSynced="True" ended="01/09/2025 05:39:06" isEndedSynced="True" />
+    <Attempt id="18" started="01/09/2025 05:39:06" isStartedSynced="True" ended="01/09/2025 05:42:29" isEndedSynced="True" />
+    <Attempt id="19" started="01/09/2025 05:42:29" isStartedSynced="True" ended="01/09/2025 05:54:21" isEndedSynced="True" />
+    <Attempt id="20" started="01/09/2025 05:54:21" isStartedSynced="True" ended="01/09/2025 05:54:35" isEndedSynced="True" />
+    <Attempt id="21" started="01/09/2025 05:54:35" isStartedSynced="True" ended="01/09/2025 05:56:24" isEndedSynced="True" />
+    <Attempt id="22" started="01/09/2025 05:56:25" isStartedSynced="True" ended="01/09/2025 05:59:12" isEndedSynced="True" />
+    <Attempt id="23" started="01/09/2025 05:59:12" isStartedSynced="True" ended="01/09/2025 06:13:05" isEndedSynced="True" />
+    <Attempt id="24" started="01/09/2025 06:13:52" isStartedSynced="True" ended="01/09/2025 06:15:41" isEndedSynced="True" />
+  </AttemptHistory>
+  <Segments>
+    <Segment>
+      <Name>THE WALL</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime>
+        <RealTime>00:00:19.3716630</RealTime>
+        <GameTime>00:00:04.9187813</GameTime>
+      </BestSegmentTime>
+      <SegmentHistory>
+        <Time id="7">
+          <RealTime>00:00:57.2586890</RealTime>
+          <GameTime>00:00:57.2586890</GameTime>
+        </Time>
+        <Time id="8">
+          <RealTime>00:08:03.7267830</RealTime>
+          <GameTime>00:08:03.7267830</GameTime>
+        </Time>
+        <Time id="10">
+          <RealTime>00:07:59.8198370</RealTime>
+          <GameTime>00:07:59.8198370</GameTime>
+        </Time>
+        <Time id="11">
+          <RealTime>00:01:00.0229206</RealTime>
+          <GameTime>00:01:00.0229206</GameTime>
+        </Time>
+        <Time id="13">
+          <RealTime>00:04:50.7127210</RealTime>
+          <GameTime>00:04:50.7127210</GameTime>
+        </Time>
+        <Time id="14">
+          <RealTime>00:07:01.4597452</RealTime>
+          <GameTime>00:07:01.4597452</GameTime>
+        </Time>
+        <Time id="15">
+          <RealTime>00:00:19.3716630</RealTime>
+          <GameTime>00:00:04.9187813</GameTime>
+        </Time>
+        <Time id="18">
+          <RealTime>00:03:10.7905281</RealTime>
+          <GameTime>00:00:06.3373881</GameTime>
+        </Time>
+        <Time id="19">
+          <RealTime>00:08:40.8804579</RealTime>
+          <GameTime>00:08:40.8804579</GameTime>
+        </Time>
+        <Time id="21">
+          <RealTime>00:01:37.7945191</RealTime>
+          <GameTime>00:00:06.5076881</GameTime>
+        </Time>
+        <Time id="22">
+          <RealTime>00:02:33.1271061</RealTime>
+          <GameTime>00:00:06.2235057</GameTime>
+        </Time>
+        <Time id="23">
+          <RealTime>00:06:48.7291221</RealTime>
+          <GameTime>00:06:48.7285325</GameTime>
+        </Time>
+      </SegmentHistory>
+    </Segment>
+    <Segment>
+      <Name>FAILED BIOME</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime>
+        <RealTime>00:00:56.3978220</RealTime>
+        <GameTime>00:00:47.8946588</GameTime>
+      </BestSegmentTime>
+      <SegmentHistory>
+        <Time id="14">
+          <RealTime>00:01:04.4812034</RealTime>
+          <GameTime>00:01:04.4812034</GameTime>
+        </Time>
+        <Time id="19">
+          <RealTime>00:03:00.5142459</RealTime>
+          <GameTime>00:03:00.5142459</GameTime>
+        </Time>
+        <Time id="23">
+          <RealTime>00:00:56.3978220</RealTime>
+          <GameTime>00:00:47.8946588</GameTime>
+        </Time>
+      </SegmentHistory>
+    </Segment>
+    <Segment>
+      <Name>WASTE TUNNELS</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime>
+        <RealTime>00:05:52.9944085</RealTime>
+        <GameTime>00:05:43.8601655</GameTime>
+      </BestSegmentTime>
+      <SegmentHistory>
+        <Time id="14">
+          <RealTime>00:10:37.8614315</RealTime>
+          <GameTime>00:10:37.8607959</GameTime>
+        </Time>
+        <Time id="23">
+          <RealTime>00:05:52.9944085</RealTime>
+          <GameTime>00:05:43.8601655</GameTime>
+        </Time>
+      </SegmentHistory>
+    </Segment>
+    <Segment>
+      <Name>ANCIENT CISTERN</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime />
+      <SegmentHistory />
+    </Segment>
+    <Segment>
+      <Name>UNDERCITY</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime />
+      <SegmentHistory />
+    </Segment>
+    <Segment>
+      <Name>FOUNDATION</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime />
+      <SegmentHistory />
+    </Segment>
+    <Segment>
+      <Name>THE SUNKEN CITY</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime />
+      <SegmentHistory />
+    </Segment>
+    <Segment>
+      <Name>DISSOLUTION</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime />
+      <SegmentHistory />
+    </Segment>
+  </Segments>
+  <AutoSplitterSettings />
+</Run>

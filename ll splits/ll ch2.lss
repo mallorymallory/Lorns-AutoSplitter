@@ -3,7 +3,8 @@
   <GameIcon />
   <GameName>Lorn's Lure Ch2</GameName>
   <CategoryName>Any%</CategoryName>
-  <LayoutPath>C:\Users\Mallory\Downloads\LiveSplit_1.8.29\ll.lsl</LayoutPath>
+  <LayoutPath>
+  </LayoutPath>
   <Metadata>
     <Run id="" />
     <Platform usesEmulator="False">

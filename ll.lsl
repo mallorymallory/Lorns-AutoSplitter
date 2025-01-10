@@ -4,7 +4,7 @@
   <X>21</X>
   <Y>8</Y>
   <VerticalWidth>252</VerticalWidth>
-  <VerticalHeight>314</VerticalHeight>
+  <VerticalHeight>283</VerticalHeight>
   <HorizontalWidth>-1</HorizontalWidth>
   <HorizontalHeight>-1</HorizontalHeight>
   <Settings>
@@ -48,7 +48,7 @@
         <Reset>True</Reset>
         <Split>True</Split>
         <CustomSettings>
-          <Setting id="ch1" type="bool">True</Setting>
+          <Setting id="ch1" type="bool">False</Setting>
           <Setting id="ch2" type="bool">False</Setting>
           <Setting id="ch3" type="bool">False</Setting>
           <Setting id="ch4" type="bool">False</Setting>
@@ -56,7 +56,9 @@
           <Setting id="ch6" type="bool">False</Setting>
           <Setting id="ch7" type="bool">False</Setting>
           <Setting id="ch8" type="bool">False</Setting>
-          <Setting id="logging" type="bool">False</Setting>
+          <Setting id="full run" type="bool">True</Setting>
+          <Setting id="logging" type="bool">True</Setting>
+          <Setting id="logging (checkpoints only)" type="bool">False</Setting>
           <Setting id="notifications" type="bool">True</Setting>
         </CustomSettings>
       </Settings>
@@ -116,24 +118,6 @@
             <TimingMethod>Current Timing Method</TimingMethod>
           </Settings>
         </Columns>
-      </Settings>
-    </Component>
-    <Component>
-      <Path>LiveSplit.ComparisonTime.dll</Path>
-      <Settings>
-        <Version>1.4</Version>
-        <TextColor>FFFFFFFF</TextColor>
-        <OverrideTextColor>False</OverrideTextColor>
-        <TimeColor>FFFFFFFF</TimeColor>
-        <OverrideTimeColor>False</OverrideTimeColor>
-        <Accuracy>Hundredths</Accuracy>
-        <BackgroundColor>00FFFFFF</BackgroundColor>
-        <BackgroundColor2>00FFFFFF</BackgroundColor2>
-        <BackgroundGradient>Plain</BackgroundGradient>
-        <Comparison>Best Segments</Comparison>
-        <TimingMethod>Current Timing Method</TimingMethod>
-        <Display2Rows>False</Display2Rows>
-        <Type>SplitTime</Type>
       </Settings>
     </Component>
     <Component>
