@@ -43,7 +43,7 @@
       <Path>LiveSplit.ScriptableAutoSplit.dll</Path>
       <Settings>
         <Version>1.5</Version>
-        <ScriptPath>C:\Users\Mallory\Downloads\LiveSplit_1.8.29\LornsLure.ASL</ScriptPath>
+        <ScriptPath>\LornsLure.ASL</ScriptPath>
         <Start>True</Start>
         <Reset>True</Reset>
         <Split>True</Split>
