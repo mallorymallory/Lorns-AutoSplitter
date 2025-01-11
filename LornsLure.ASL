@@ -24,6 +24,7 @@ startup{
     settings.Add("logging (checkpoints only)", false);
     settings.Add("notifications");
 
+
     refreshRate = 30;
 }
 
@@ -247,7 +248,8 @@ update
                 }
                 if (settings["logging"]){
 		            File.AppendAllText(vars.logs, current.timer0.ToString() +","+current.timer1.ToString() +","+current.timer2.ToString() +","+current.timer3.ToString() + '\n');
-                    File.AppendAllText(vars.logs, "START: Pointer found: "+ vars.ofsind.ToString() + '\n');
+                    File.AppendAllText(vars.logs, "START: Valid Timer Pointer found: "+ vars.timerind.ToString() + '\n');
+                    File.AppendAllText(vars.logs, "START: Valid Checkpoint Pointer found: "+ vars.ofsind.ToString() + '\n');
                 }
             }
         }
@@ -280,7 +282,8 @@ update
             vars.TimerBase = TimerBase;
             if (settings["logging"]){
 		        File.AppendAllText(vars.logs, current.timer0.ToString() +","+current.timer1.ToString() +","+current.timer2.ToString() +","+current.timer3.ToString() + '\n');
-                File.AppendAllText(vars.logs, vars.currenttimer.ToString("N2")+": START: Base found: "+ vars.Base.ToString("x") + '\n');
+                File.AppendAllText(vars.logs, vars.currenttimer.ToString("N2")+": START: Timer Base found: "+ vars.TimerBase.ToString("x") + '\n');
+                File.AppendAllText(vars.logs, vars.currenttimer.ToString("N2")+": START: Check Base found: "+ vars.Base.ToString("x") + '\n');
                 File.AppendAllText(vars.logs, vars.currenttimer.ToString("N2")+": START: end valid?: "+ current.end.ToString() + '\n');
             }
             if (settings["notifications"]){
@@ -311,10 +314,9 @@ update
         }
 
 	    if (current.end != old.end){
-        	if (current.end == 1 && old.end == 208601088){          //check if endscreen is showing > split
+        	if (current.end == 1 && old.end != 0){          //check if endscreen is showing > split
         	    vars.Split = true; 
         	    if (settings["logging"]){
-			        
         	        File.AppendAllText(vars.logs, vars.currenttimer.ToString("N2")+": END: end trigger activated \n");
         	    }
         	}
