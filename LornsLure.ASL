@@ -8,7 +8,8 @@ state("LornsLure")
     float timer2 : "UnityPlayer.dll", 0x018136F8, 0x110, 0x480, 0x10, 0x38, 0x0, 0x16CC;
     float timer3 : "UnityPlayer.dll", 0x01812AF8, 0x110, 0x480, 0x10, 0x38, 0x0, 0x16CC;
     int end : "mono-2.0-bdwgc.dll", 0x0049D208, 0x198, 0x410, 0x720, 0x100, 0x208, 0x40, 0xC0;
- }  //int end : "mono-2.0-bdwgc.dll", 0x0049D208, 0x198, 0x428, 0x710, 0x100, 0x208, 0x40, 0xC0
+    int end2 : "mono-2.0-bdwgc.dll", 0x0049D208, 0x198, 0x428, 0x710, 0x100, 0x208, 0x40, 0xC0;
+ }  
 
 startup{
     settings.Add("ch1");
@@ -147,6 +148,10 @@ init
     vars.oldtimer = 0;
     vars.currenttimer = 0;
 
+    vars.End = 0;
+    vars.end00=0;
+    vars.end11=0;
+
     vars.Setup = false;
     vars.Split = false;
     vars.Reset = false;
@@ -258,12 +263,14 @@ update
         
         if (vars.Base.GetType() == typeof(int)){ // init located memory address if not set
             IntPtr Base = IntPtr.Zero;
+	    IntPtr End = IntPtr.Zero;
             IntPtr TimerBase = IntPtr.Zero;
             vars.m = new DeepPointer("UnityPlayer.dll",vars.hexofs[vars.ofsind][0],
                                     vars.hexofs[vars.ofsind][1],vars.hexofs[vars.ofsind][2],
                                     vars.hexofs[vars.ofsind][3],vars.hexofs[vars.ofsind][4],
                                     vars.hexofs[vars.ofsind][5],vars.hexofs[vars.ofsind][6],
                                     vars.hexofs[vars.ofsind][7]).DerefOffsets(game, out Base);
+	    vars.mm = new DeepPointer("mono-2.0-bdwgc.dll", 0x0049D208, 0x198, 0x410, 0x720, 0x100, 0x208, 0x40, 0xC0).DerefOffsets(game, out End);
             if (vars.timerind < 2){
                 vars.n = new DeepPointer("UnityPlayer.dll", vars.timerplist[vars.timerind][0],
                                     vars.timerplist[vars.timerind][1],vars.timerplist[vars.timerind][2],
@@ -278,6 +285,7 @@ update
                                     ).DerefOffsets(game, out TimerBase);
             }
             
+	    vars.END = End;
             vars.Base = Base;
             vars.TimerBase = TimerBase;
             if (settings["logging"]){
@@ -292,6 +300,7 @@ update
         }
         vars.d = memory.ReadValue<long>((IntPtr)vars.Base);     // get current checkpoint value from memory 
         vars.currenttimer = memory.ReadValue<float>((IntPtr)vars.TimerBase);
+	vars.end00 = memory.ReadValue<int>((IntPtr)vars.END);
 
         if (vars.d != vars.d2){                                 //check if checkpoint changed, and if split needed
             vars.d2 = vars.d;
@@ -313,17 +322,17 @@ update
             }
         }
 
-	    if (current.end != old.end){
-        	if (current.end == 1 && old.end != 0){          //check if endscreen is showing > split
+	    if (current.end != old.end || vars.end00 != vars.end11){
+        	if (current.end == 1 && old.end != 0 || vars.end00 == 1 && vars.end11 != 0){          //check if endscreen is showing > split
         	    vars.Split = true; 
         	    if (settings["logging"]){
         	        File.AppendAllText(vars.logs, vars.currenttimer.ToString("N2")+": END: end trigger activated \n");
         	    }
         	}
 		
-		File.AppendAllText(vars.logs, vars.currenttimer.ToString("N2")+": END: end trigger changed: "+old.end.ToString()+">"+current.end.ToString()+"\n");
+		File.AppendAllText(vars.logs, vars.currenttimer.ToString("N2")+": END: end trigger changed: "+current.end.ToString()+">"+old.end.ToString()+"||"+vars.end00.ToString()+">"+vars.end11.ToString()+"\n");
 	    }
-        if(vars.currenttimer < vars.oldtimer){                          // check if timer0 reset > reset (if not full run)
+        if(vars.currenttimer < vars.oldtimer){                          // check if timer reset > reset (if not full run)
             if (!vars.fgnore){
                 vars.Reset = true;
                 vars.splitx=0;
@@ -346,6 +355,7 @@ update
             }  
         }   
         vars.oldtimer = vars.currenttimer;
+	vars.end11 = vars.end00;
 
     }
     if (!vars.Setup){
@@ -373,4 +383,3 @@ start{
     // print("yippee");
     return true;
     }
-
