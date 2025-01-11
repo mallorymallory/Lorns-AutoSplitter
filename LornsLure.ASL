@@ -217,8 +217,8 @@ update
                                     vars.hexofs[vars.ofsind][7]).DerefOffsets(game, out Base);
             vars.Base = Base;
             if (settings["logging"]){
-                File.AppendAllText(vars.logs, "START: Base found: "+ vars.Base.ToString("x") + '\n');
-                File.AppendAllText(vars.logs, "START: end valid?: "+ current.end.ToString() + '\n');
+                File.AppendAllText(vars.logs, current.timer.ToString("N2")+": START: Base found: "+ vars.Base.ToString("x") + '\n');
+                File.AppendAllText(vars.logs, current.timer.ToString("N2")+": START: end valid?: "+ current.end.ToString() + '\n');
             }
             if (settings["notifications"]){
                 MessageBox.Show("System memory located, program is calibrated for use. \n\nMemory Address: "+vars.Base.ToString("x")+"\n\nDouble-check the level is selected (via Edit Layout>Layout Settings>Scriptable Auto Splitter>Advanced), and that the matching splits are opened :) \n\nHappy running!", "System Calibrated! Lure's Lorned.",MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
@@ -229,7 +229,7 @@ update
         if (vars.d != vars.d2){                                 //check if checkpoint changed, and if split needed
             vars.d2 = vars.d;
             if (settings["logging"]){
-                File.AppendAllText(vars.logs, "UPDATE:"+vars.d.ToString() +" activated: next checkpoint: "+
+                File.AppendAllText(vars.logs, current.timer.ToString("N2")+": UPDATE:"+vars.d.ToString() +" activated: next checkpoint: "+
                 vars.splits[vars.Chapter][vars.splitx].ToString()+ '\n');
             }
             if (settings["logging (checkpoints only)"]){
@@ -245,14 +245,15 @@ update
             }
         }
 
-
-        if (current.end == 1 && old.end == 208601088){          //check if endscreen is showing > split
-            vars.Split = true; 
-            if (settings["logging"]){
-                File.AppendAllText(vars.logs, "END: end trigger activated");
-            }
-        }
-
+	if (current.end != old.end){
+        	if (current.end == 1 && old.end == 208601088){          //check if endscreen is showing > split
+        	    vars.Split = true; 
+        	    if (settings["logging"]){
+        	        File.AppendAllText(vars.logs, current.timer.ToString("N2")+": END: end trigger activated");
+        	    }
+        	}
+		File.AppendAllText(vars.logs, current.timer.ToString("N2")+": END: end trigger changed: "+old.end.ToString()+">"+current.end.ToString());
+	}
         if(current.timer < old.timer){                          // check if timer reset > reset (if not full run)
             if (!vars.fgnore){
                 vars.Reset = true;
@@ -271,7 +272,7 @@ update
             };    
             vars.Chapter = Array.IndexOf(chapters, true);
             if (settings["logging"]){
-                File.AppendAllText(vars.logs, "RESET: Chapter:"+vars.Chapter.ToString() + '\n');
+                File.AppendAllText(vars.logs, current.timer.ToString("N2")+": RESET: Chapter:"+vars.Chapter.ToString() + '\n');
             }  
         }
 
