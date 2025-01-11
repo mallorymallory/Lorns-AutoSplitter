@@ -3,7 +3,10 @@ state("LornsLure")
     long checkpoint0 : "UnityPlayer.dll", 0x017FE578, 0xA50, 0x2D8, 0x190, 0x150, 0x60, 0x98, 0x28;
     long checkpoint1 : "UnityPlayer.dll", 0x017FE578, 0xDE8, 0x2D8, 0x190, 0x150, 0x60, 0x98, 0x28;
     long checkpoint2 : "UnityPlayer.dll", 0x017FE578, 0xA60, 0x2D8, 0x190, 0x150, 0x60, 0x98, 0x28;
-    float timer : "UnityPlayer.dll", 0x01840978, 0x140, 0x38,0xD0,0x18,0x0,0x98,0x127C;
+    float timer0 : "UnityPlayer.dll", 0x01840978, 0x140, 0x38,0xD0,0x18,0x0,0x98,0x127C;
+    float timer1 : "UnityPlayer.dll", 0x01840978, 0x140, 0x48,0xD0,0x18,0x0,0x98,0x127C;
+    float timer2 : "UnityPlayer.dll", 0x018136F8, 0x110, 0x480, 0x10, 0x38, 0x0, 0x16CC;
+    float timer3 : "UnityPlayer.dll"+ 0x01812AF8, 0x110, 0x480, 0x10, 0x38, 0x0, 0x16CC;
     int end : "mono-2.0-bdwgc.dll", 0x0049D208, 0x198, 0x410, 0x720, 0x100, 0x208, 0x40, 0xC0;
  }  //int end : "mono-2.0-bdwgc.dll", 0x0049D208, 0x198, 0x428, 0x710, 0x100, 0x208, 0x40, 0xC0
 
@@ -158,10 +161,10 @@ init
     vars.hexofs = hexofs;
     vars.ofsind = false;
     if (settings["notifications"]){
-        MessageBox.Show("welcome to Lorn's Lure autosplitter~ \n\nto calibrate the program, please restart Chapter 1. The Wall, and run the first three checkpoints until the timer starts. if the timer does not start after the third checkpoint, please hold T to reset and try again", "Needs calibration, lures need lorning",MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+        MessageBox.Show("welcome to Lorn's Lure autosplitter~ \n\nto calibrate the program, please restart Chapter 1. The Wall, and run the first three checkpoints until the timer0 starts. if the timer0 does not start after the third checkpoint, please hold T to reset and try again", "Needs calibration, lures need lorning",MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
     }
 }   
-
+File.AppendAllText(vars.logs, current.timer0.ToString() +","+current.timer1.ToString() +","+current.timer2.ToString() +","+current.timer3.ToString() + '\n');
 update
 {
     if (!vars.Setup) { // locating the checkpoint memory address from reliable chapter 1 pointers
@@ -217,8 +220,8 @@ update
                                     vars.hexofs[vars.ofsind][7]).DerefOffsets(game, out Base);
             vars.Base = Base;
             if (settings["logging"]){
-                File.AppendAllText(vars.logs, current.timer.ToString("N2")+": START: Base found: "+ vars.Base.ToString("x") + '\n');
-                File.AppendAllText(vars.logs, current.timer.ToString("N2")+": START: end valid?: "+ current.end.ToString() + '\n');
+                File.AppendAllText(vars.logs, current.timer0.ToString("N2")+": START: Base found: "+ vars.Base.ToString("x") + '\n');
+                File.AppendAllText(vars.logs, current.timer0.ToString("N2")+": START: end valid?: "+ current.end.ToString() + '\n');
             }
             if (settings["notifications"]){
                 MessageBox.Show("System memory located, program is calibrated for use. \n\nMemory Address: "+vars.Base.ToString("x")+"\n\nDouble-check the level is selected (via Edit Layout>Layout Settings>Scriptable Auto Splitter>Advanced), and that the matching splits are opened :) \n\nHappy running!", "System Calibrated! Lure's Lorned.",MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
@@ -229,7 +232,7 @@ update
         if (vars.d != vars.d2){                                 //check if checkpoint changed, and if split needed
             vars.d2 = vars.d;
             if (settings["logging"]){
-                File.AppendAllText(vars.logs, current.timer.ToString("N2")+": UPDATE:"+vars.d.ToString() +" activated: next checkpoint: "+
+                File.AppendAllText(vars.logs, current.timer0.ToString("N2")+": UPDATE:"+vars.d.ToString() +" activated: next checkpoint: "+
                 vars.splits[vars.Chapter][vars.splitx].ToString()+ '\n');
             }
             if (settings["logging (checkpoints only)"]){
@@ -238,7 +241,7 @@ update
             if (vars.d == vars.splits[vars.Chapter][vars.splitx]){ 
                 vars.Split = true;
                 vars.splitx++;
-                if (vars.Chapter == 8){                         // if full run, pause until timer resets (new level start)
+                if (vars.Chapter == 8){                         // if full run, pause until timer0 resets (new level start)
                     vars.fgnore = true;
                     vars.IsLoading = true;
                 }
@@ -249,12 +252,12 @@ update
         	if (current.end == 1 && old.end == 208601088){          //check if endscreen is showing > split
         	    vars.Split = true; 
         	    if (settings["logging"]){
-        	        File.AppendAllText(vars.logs, current.timer.ToString("N2")+": END: end trigger activated");
+        	        File.AppendAllText(vars.logs, current.timer0.ToString("N2")+": END: end trigger activated");
         	    }
         	}
-		File.AppendAllText(vars.logs, current.timer.ToString("N2")+": END: end trigger changed: "+old.end.ToString()+">"+current.end.ToString());
+		File.AppendAllText(vars.logs, current.timer0.ToString("N2")+": END: end trigger changed: "+old.end.ToString()+">"+current.end.ToString());
 	}
-        if(current.timer < old.timer){                          // check if timer reset > reset (if not full run)
+        if(current.timer0 < old.timer0){                          // check if timer0 reset > reset (if not full run)
             if (!vars.fgnore){
                 vars.Reset = true;
                 vars.splitx=0;
@@ -272,7 +275,7 @@ update
             };    
             vars.Chapter = Array.IndexOf(chapters, true);
             if (settings["logging"]){
-                File.AppendAllText(vars.logs, current.timer.ToString("N2")+": RESET: Chapter:"+vars.Chapter.ToString() + '\n');
+                File.AppendAllText(vars.logs, current.timer0.ToString("N2")+": RESET: Chapter:"+vars.Chapter.ToString() + '\n');
             }  
         }
 
