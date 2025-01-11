@@ -17,15 +17,29 @@ This repo contains Layout and Splits files mainly for convenience
 2. Open Livesplit
 3. Right Click LiveSplit > Open Layout > From File... > your_location/ll.lsl
 4. Right Click LiveSplit > Edit Layout > Layout Settings > Scriptable AutoSplitter > Choose file > your_location/LornsLure.ASL
-5. Right Click LiveSplit > Open Splits > From File... > your_location/ll splits/<the level you're running>
-6. Open Lorn's Lure
-7. > notification
+5. if done correctly, settings/level selection menu opens - you can change to your prefered level here.
+6. Right Click LiveSplit > Open Splits > From File... > your_location/ll splits/<the level you're running>
+7. Open Lorn's Lure
+8. notification
+9. calibration
 
-# **Gameplay:**
+
+# **Calibration:**
 
 This Autosplitter needs calibration to find the checkpoint values. <br/>
 After the first notification, open Ch1, the wall, and runn the first 3 checkpoints until you get another notification.
 If the notification doesn't appear after reaching the third checkpoint, hold T to restart and try again. <br/>
 After the second notification, it's time to run :)
+
+# **Gameplay:**
+* timer resets on scene changes
+* timer splits on active checkpoint changes, and end screen triggers
+* if a listed checkpoint is missed, the subsequent splits will not trigger
+* internal level selection settings take effect after resets (see first note)
+
+
+if something is not working, enable logging and submit paste to issues
+
+
 
 *i am not good at C#*
