@@ -40,6 +40,7 @@ After the second notification, it's time to run :)
 
 if something is not working, enable logging and submit paste to issues
 
-
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/e2QnrlqrByQ/0.jpg)](https://www.youtube.com/watch?v=e2QnrlqrByQ)
+(bideo guide)
 
 *i am not good at C#*
