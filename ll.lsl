@@ -43,7 +43,7 @@
       <Path>LiveSplit.ScriptableAutoSplit.dll</Path>
       <Settings>
         <Version>1.5</Version>
-        <ScriptPath>\LornsLure.ASL</ScriptPath>
+        <ScriptPath>LornsLure.ASL</ScriptPath>
         <Start>True</Start>
         <Reset>True</Reset>
         <Split>True</Split>
@@ -55,8 +55,8 @@
           <Setting id="ch5" type="bool">False</Setting>
           <Setting id="ch6" type="bool">False</Setting>
           <Setting id="ch7" type="bool">False</Setting>
-          <Setting id="ch8" type="bool">False</Setting>
-          <Setting id="full run" type="bool">True</Setting>
+          <Setting id="ch8" type="bool">True</Setting>
+          <Setting id="full run" type="bool">False</Setting>
           <Setting id="logging" type="bool">True</Setting>
           <Setting id="logging (checkpoints only)" type="bool">False</Setting>
           <Setting id="notifications" type="bool">True</Setting>
