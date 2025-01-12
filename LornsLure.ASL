@@ -161,10 +161,10 @@ init
     //TIMER STUFF
     vars.timerplist = false;
     int[][] timerplist = new int[4][];
-    timerplist[0] = new int[] {0x01840978, 0x140, 0x38,0xD0,0x18,0x0,0x98,0x127C};
-    timerplist[1] = new int[] {0x01840978, 0x140, 0x48,0xD0,0x18,0x0,0x98,0x127C};
-    timerplist[2] = new int[] {0x018136F8, 0x110, 0x480, 0x10, 0x38, 0x0, 0x16CC};
-    timerplist[3] = new int[] {0x01812AF8, 0x110, 0x480, 0x10, 0x38, 0x0, 0x16CC};
+    timerplist[0] = new int[] {0x01801B90, 0x80,  0x10, 0x18, 0x18, 0x18, 0x38,0xDB0,0x127C};
+    timerplist[1] = new int[] {0x01842548, 0x2A8, 0x90, 0x50, 0x50, 0x80, 0x30,0x100,0x127C};
+    timerplist[2] = new int[] {0x0180A5F0, 0x108, 0x10, 0x10, 0x10,0x480, 0x10,  0x0,0x16DC};
+    timerplist[3] = new int[] {0x01842548, 0x2A8, 0x90,  0x0, 0x48, 0x50, 0x70,0x100,0x128C};
     vars.timerplist = timerplist;
 
     int[] timercounter = new int[]{
@@ -271,19 +271,11 @@ update
                                     vars.hexofs[vars.ofsind][5],vars.hexofs[vars.ofsind][6],
                                     vars.hexofs[vars.ofsind][7]).DerefOffsets(game, out Base);
 	    vars.mm = new DeepPointer("mono-2.0-bdwgc.dll", 0x0049D208, 0x198, 0x410, 0x720, 0x100, 0x208, 0x40, 0xC0).DerefOffsets(game, out End);
-            if (vars.timerind < 2){
-                vars.n = new DeepPointer("UnityPlayer.dll", vars.timerplist[vars.timerind][0],
+            vars.n = new DeepPointer("UnityPlayer.dll", vars.timerplist[vars.timerind][0],
                                     vars.timerplist[vars.timerind][1],vars.timerplist[vars.timerind][2],
                                     vars.timerplist[vars.timerind][3],vars.timerplist[vars.timerind][4],
                                     vars.timerplist[vars.timerind][5],vars.timerplist[vars.timerind][6],
-                                    vars.timerplist[vars.timerind][7]).DerefOffsets(game, out TimerBase);
-            } else{
-                vars.n = new DeepPointer("UnityPlayer.dll", vars.timerplist[vars.timerind][0],
-                                    vars.timerplist[vars.timerind][1],vars.timerplist[vars.timerind][2],
-                                    vars.timerplist[vars.timerind][3],vars.timerplist[vars.timerind][4],
-                                    vars.timerplist[vars.timerind][5],vars.timerplist[vars.timerind][6]
-                                    ).DerefOffsets(game, out TimerBase);
-            }
+                                    vars.timerplist[vars.timerind][7],vars.timerplist[vars.timerind][8]).DerefOffsets(game, out TimerBase);
             
 	        vars.END = End;
             vars.Base = Base;
