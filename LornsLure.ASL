@@ -154,7 +154,7 @@ init
     vars.splitx = 0;
     vars.splits = splits;
 
-    vars.logs = "logs.txt";
+    vars.logs = "llasl_logs_v1.txt";
 
     vars.Base = 0;
     vars.d = 0;
