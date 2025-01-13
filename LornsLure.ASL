@@ -21,6 +21,11 @@ startup{
     settings.Add("ch7", false);
     settings.Add("ch8", false);
     settings.Add("full run", false);
+
+    settings.Add("custom 1", false);
+    settings.Add("custom 2", false);
+    settings.Add("custom 3", false);
+
     settings.Add("logging");
     settings.Add("logging (checkpoints only)", false);
     settings.Add("notifications");
@@ -31,16 +36,18 @@ startup{
 
 init
 {
-    bool[] chapters = new bool[9] {
+    bool[] chapters = new bool[] {
         settings["ch1"],    settings["ch2"],
         settings["ch3"],    settings["ch4"],
         settings["ch5"],    settings["ch6"],
         settings["ch7"],    settings["ch8"],
-        settings["full run"]
+        settings["full run"],
+        settings["custom 1"],settings["custom 2"],
+        settings["custom 3"]
     };    
 
     vars.Chapter = Array.IndexOf(chapters, true);
-    long[][] splits = new long[9][];
+    long[][] splits = new long[12][];
 
     splits[0] = new long[]{ // chapter 1 wall
         -4373552839777700413,
@@ -134,6 +141,15 @@ init
     splits[8] = new long[]{ //full run, basic no segments
         0,0,0,0,0,0,0,0
     };
+    splits[9] = new long[]{ //custom split
+        0,0,0,0,0,0,0,0
+    };
+    splits[10] = new long[]{ //custom split
+        0,0,0,0,0,0,0,0
+    };
+    splits[11] = new long[]{ //custom split
+        0,0,0,0,0,0,0,0
+    };
     
     vars.splitx = 0;
     vars.splits = splits;
@@ -221,8 +237,8 @@ update
                     if (Array.IndexOf(vars.validpointers[i], checkvals[ii]) == -1){
                         vars.validpointers[i][ii] = checkvals[ii];
                         if (settings["logging"]){
-			                File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+current.timer0.ToString() +","+current.timer1.ToString() +","+current.timer2.ToString() +","+current.timer3.ToString() + '\n');
-                            File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+
+			                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+current.timer0.ToString() +","+current.timer1.ToString() +","+current.timer2.ToString() +","+current.timer3.ToString() + '\n');
+                            File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+
                                 "START:checkpoint found:"+
                                 i.ToString()+":"+ii.ToString()+":"+
                                 vars.validpointers[i][0].ToString()+","+
@@ -246,15 +262,14 @@ update
                 vars.Setup = true;
                 vars.ofsind = jj;
                 for (int jjj = 0; jjj < vars.timercounter.Length; jjj++){
-                    print(vars.timercounter[jjj].ToString());
                     if (vars.timercounter[jjj]>100){
                         vars.timerind = jjj;
                     }
                 }
                 if (settings["logging"]){
-		            File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+current.timer0.ToString() +","+current.timer1.ToString() +","+current.timer2.ToString() +","+current.timer3.ToString() + '\n');
-                    File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+"START: Valid Timer Pointer found: "+ vars.timerind.ToString() + '\n');
-                    File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+"START: Valid Checkpoint Pointer found: "+ vars.ofsind.ToString() + '\n');
+		            File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+current.timer0.ToString() +","+current.timer1.ToString() +","+current.timer2.ToString() +","+current.timer3.ToString() + '\n');
+                    File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+"START: Valid Timer Pointer found: "+ vars.timerind.ToString() + '\n');
+                    File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+"START: Valid Checkpoint Pointer found: "+ vars.ofsind.ToString() + '\n');
                 }
             }
         }
@@ -270,21 +285,22 @@ update
                                     vars.hexofs[vars.ofsind][3],vars.hexofs[vars.ofsind][4],
                                     vars.hexofs[vars.ofsind][5],vars.hexofs[vars.ofsind][6],
                                     vars.hexofs[vars.ofsind][7]).DerefOffsets(game, out Base);
-	    vars.mm = new DeepPointer("mono-2.0-bdwgc.dll", 0x0049D208, 0x198, 0x410, 0x720, 0x100, 0x208, 0x40, 0xC0).DerefOffsets(game, out End);
+	        vars.mm = new DeepPointer("mono-2.0-bdwgc.dll", 0x0049D208, 0x198, 0x410, 0x720, 0x100, 0x208, 0x40, 0xC0).DerefOffsets(game, out End);
+
             vars.n = new DeepPointer("UnityPlayer.dll", vars.timerplist[vars.timerind][0],
-                                    vars.timerplist[vars.timerind][1],vars.timerplist[vars.timerind][2],
-                                    vars.timerplist[vars.timerind][3],vars.timerplist[vars.timerind][4],
-                                    vars.timerplist[vars.timerind][5],vars.timerplist[vars.timerind][6],
-                                    vars.timerplist[vars.timerind][7],vars.timerplist[vars.timerind][8]).DerefOffsets(game, out TimerBase);
+                                vars.timerplist[vars.timerind][1],vars.timerplist[vars.timerind][2],
+                                vars.timerplist[vars.timerind][3],vars.timerplist[vars.timerind][4],
+                                vars.timerplist[vars.timerind][5],vars.timerplist[vars.timerind][6],
+                                vars.timerplist[vars.timerind][7],vars.timerplist[vars.timerind][8]).DerefOffsets(game, out TimerBase);
             
 	        vars.END = End;
             vars.Base = Base;
             vars.TimerBase = TimerBase;
             if (settings["logging"]){
-		        File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+current.timer0.ToString() +","+current.timer1.ToString() +","+current.timer2.ToString() +","+current.timer3.ToString() + '\n');
-                File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+vars.currenttimer.ToString("N2")+": START: Timer Base found: "+ vars.TimerBase.ToString("x") + '\n');
-                File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+vars.currenttimer.ToString("N2")+": START: Check Base found: "+ vars.Base.ToString("x") + '\n');
-                File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+vars.currenttimer.ToString("N2")+": START: end valid?: "+ current.end.ToString() + "||" + current.end2.ToString() + '\n');
+		        File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+current.timer0.ToString() +","+current.timer1.ToString() +","+current.timer2.ToString() +","+current.timer3.ToString() + '\n');
+                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+vars.currenttimer.ToString("N2")+": START: Timer Base found: "+ vars.TimerBase.ToString("x") + '\n');
+                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+vars.currenttimer.ToString("N2")+": START: Check Base found: "+ vars.Base.ToString("x") + '\n');
+                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+vars.currenttimer.ToString("N2")+": START: end valid?: "+ current.end.ToString() + "||" + current.end2.ToString() + '\n');
             }
             if (settings["notifications"]){
                 MessageBox.Show("System memory located, program is calibrated for use. \n\nMemory Address: "+vars.Base.ToString("x")+"\n\nDouble-check the level is selected (via Edit Layout>Layout Settings>Scriptable Auto Splitter>Advanced), and that the matching splits are opened :) \n\nHappy running!", "System Calibrated! Lure's Lorned.",MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
@@ -298,11 +314,11 @@ update
             vars.d2 = vars.d;
             if (settings["logging"]){
 		        
-                File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+vars.currenttimer.ToString("N2")+": UPDATE:"+vars.d.ToString() +" activated: next checkpoint: "+
+                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+vars.currenttimer.ToString("N2")+": UPDATE:"+vars.d.ToString() +" activated: next checkpoint: "+
                 vars.splits[vars.Chapter][vars.splitx].ToString()+ '\n');
             }
             if (settings["logging (checkpoints only)"]){
-                File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+vars.d.ToString()+"\n");
+                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+vars.d.ToString()+"\n");
             }
             if (vars.d == vars.splits[vars.Chapter][vars.splitx]){ 
                 vars.Split = true;
@@ -318,11 +334,11 @@ update
         	if (current.end == 1 && old.end != 0 || vars.end00 == 1 && vars.end11 != 0){          //check if endscreen is showing > split
         	    vars.Split = true; 
         	    if (settings["logging"]){
-        	        File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+vars.currenttimer.ToString("N2")+": END: end trigger activated \n");
+        	        File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+vars.currenttimer.ToString("N2")+": END: end trigger activated \n");
         	    }
         	}
 		
-		File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+vars.currenttimer.ToString("N2")+": END: end trigger changed: "+current.end.ToString()+">"+old.end.ToString()+"||"+vars.end00.ToString()+">"+vars.end11.ToString()+"\n");
+		File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+vars.currenttimer.ToString("N2")+": END: end trigger changed: "+current.end.ToString()+">"+old.end.ToString()+"||"+vars.end00.ToString()+">"+vars.end11.ToString()+"\n");
 	    }
         if(vars.currenttimer < vars.oldtimer){                          // check if timer reset > reset (if not full run)
             if (!vars.fgnore){
@@ -333,17 +349,19 @@ update
                 vars.fgnore = false;
                 vars.IsLoading = false;
             }
-            bool[] chapters = new bool[9] {
+            bool[] chapters = new bool[] {
                 settings["ch1"],    settings["ch2"],
                 settings["ch3"],    settings["ch4"],
                 settings["ch5"],    settings["ch6"],
                 settings["ch7"],    settings["ch8"],
-                settings["full run"]
+                settings["full run"],
+                settings["custom 1"],settings["custom 2"],
+                settings["custom 3"]
             };    
             vars.Chapter = Array.IndexOf(chapters, true);
             if (settings["logging"]){
-		        File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+vars.currenttimer.ToString() +","+current.timer1.ToString() +","+current.timer2.ToString() +","+current.timer3.ToString() + '\n');
-                File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+vars.currenttimer.ToString("N2")+": RESET: Chapter:"+vars.Chapter.ToString() + '\n');
+		        File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+vars.currenttimer.ToString() +","+current.timer1.ToString() +","+current.timer2.ToString() +","+current.timer3.ToString() + '\n');
+                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+vars.currenttimer.ToString("N2")+": RESET: Chapter:"+vars.Chapter.ToString() + '\n');
             }  
         }   
         vars.oldtimer = vars.currenttimer;
@@ -358,7 +376,7 @@ update
 split{return vars.Split;}
 onSplit{vars.Split = false;
     if (settings["logging"]){
-        File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+"SPLIT: split" + '\n');
+        File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+"SPLIT: split" + '\n');
     }
 }
 
@@ -367,7 +385,7 @@ isLoading{return vars.IsLoading;}
 reset{return vars.Reset;}
 onReset{vars.Reset = false;
     if (settings["logging"]){
-        File.AppendAllText(vars.logs, DateTime.Now.ToString("h:mm:ss tt")+":  :"+"RESET: reset" + '\n');
+        File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+"RESET: reset" + '\n');
     }
 }
 
