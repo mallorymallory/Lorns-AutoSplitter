@@ -76,8 +76,8 @@ init
     splits[3] = new long[]{ //chapter 4 cistern
         4747694716686172161,
         4684644321929347072,
-        -4794715118743255450,
-        4614568391451473019,
+        -4794715118743255450, // possible to miss trigger in new route
+        4614568391451473019, // (maybe skipping is faster?)
         4604479822516042196,
         4571333944988624732,
         4603399002591013292,
@@ -86,7 +86,7 @@ init
         4691850108846158643,
         4604479822527998771,
         4728779612048236126,
-        4744767404469858260,
+        4744767404469858260, // likely skipped in new route
         4650416868581083879,
         4660324842737057792,
         -4520262997653782938,
@@ -139,10 +139,14 @@ init
         -4282194577509813453,
     };
     splits[8] = new long[]{ //full run, basic no segments
-        0,0,0,0,0,0,0,0
+	0,0,0,0,0,0,0,
     };
     splits[9] = new long[]{ //custom split
-        0,0,0,0,0,0,0,0
+        -4652038270201783910, // intro
+	4600156804709403853, //short walk
+	-4422045064947765084, //house
+	-4424516414898798592, //long pipe
+	-4373552839777700413, // escape spawn
     };
     splits[10] = new long[]{ //custom split
         0,0,0,0,0,0,0,0
@@ -232,17 +236,17 @@ update
         };
 
         for (int i = 0; i < checkpointers.Length; i++) {
-            for (int ii = 0; ii < checkvals.Length; ii++){
-                if (checkpointers[i]== checkvals[ii]){
-                    if (Array.IndexOf(vars.validpointers[i], checkvals[ii]) == -1){
+            for (int ii = 0; ii < checkvals.Length; ii++) {
+                if (checkpointers[i] == checkvals[ii]) {
+                    if (Array.IndexOf(vars.validpointers[i], checkvals[ii]) == -1) {
                         vars.validpointers[i][ii] = checkvals[ii];
-                        if (settings["logging"]){
-			                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+current.timer0.ToString() +","+current.timer1.ToString() +","+current.timer2.ToString() +","+current.timer3.ToString() + '\n');
-                            File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+
-                                "START:checkpoint found:"+
-                                i.ToString()+":"+ii.ToString()+":"+
-                                vars.validpointers[i][0].ToString()+","+
-                                vars.validpointers[i][1].ToString()+","+
+                        if (settings["logging"]) {
+                            File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":  :" + current.timer0.ToString() + "," + current.timer1.ToString() + "," + current.timer2.ToString() + "," + current.timer3.ToString() + '\n');
+                            File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":  :" +
+                                "START:checkpoint found:" +
+                                i.ToString() + ":" + ii.ToString() + ":" +
+                                vars.validpointers[i][0].ToString() + "," +
+                                vars.validpointers[i][1].ToString() + "," +
                                 vars.validpointers[i][2].ToString()
                                 + '\n');
                         }
@@ -250,90 +254,108 @@ update
                 }
             }
         }
-        for (int z = 0; z < timerpointers.Length; z++){
-            if (timerpointers[z]){
+        for (int z = 0; z < timerpointers.Length; z++) {
+            if (timerpointers[z]) {
                 vars.timercounter[z]++;
             }
         }
         //return false;
-        for (int jj = 0; jj < vars.validpointers.Length; jj++ ){
+        for (int jj = 0; jj < vars.validpointers.Length; jj++) {
             int containsNull = Array.IndexOf(vars.validpointers[jj], (long)0);
-            if (containsNull == -1){
+            if (containsNull == -1) {
                 vars.Setup = true;
                 vars.ofsind = jj;
-                for (int jjj = 0; jjj < vars.timercounter.Length; jjj++){
-                    if (vars.timercounter[jjj]>100){
+                for (int jjj = 0; jjj < vars.timercounter.Length; jjj++) {
+                    if (vars.timercounter[jjj] > 100) {
                         vars.timerind = jjj;
                     }
                 }
-                if (settings["logging"]){
-		            File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+current.timer0.ToString() +","+current.timer1.ToString() +","+current.timer2.ToString() +","+current.timer3.ToString() + '\n');
-                    File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+"START: Valid Timer Pointer found: "+ vars.timerind.ToString() + '\n');
-                    File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+"START: Valid Checkpoint Pointer found: "+ vars.ofsind.ToString() + '\n');
+                if (settings["logging"]) {
+                    File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":  :" + current.timer0.ToString() + "," + current.timer1.ToString() + "," + current.timer2.ToString() + "," + current.timer3.ToString() + '\n');
+                    File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":  :" + "START: Valid Timer Pointer found: " + vars.timerind.ToString() + '\n');
+                    File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":  :" + "START: Valid Checkpoint Pointer found: " + vars.ofsind.ToString() + '\n');
                 }
             }
         }
     }
-    else{ // the splitting 
-        
-        if (vars.Base.GetType() == typeof(int)){ // init located memory address if not set
+    else { // the splitting 
+        bool dvar = true;
+        if (vars.Base.GetType() == typeof(int)) { // init located memory address if not set
             IntPtr Base = IntPtr.Zero;
-	    IntPtr End = IntPtr.Zero;
+            IntPtr End = IntPtr.Zero;
             IntPtr TimerBase = IntPtr.Zero;
-            vars.m = new DeepPointer("UnityPlayer.dll",vars.hexofs[vars.ofsind][0],
-                                    vars.hexofs[vars.ofsind][1],vars.hexofs[vars.ofsind][2],
-                                    vars.hexofs[vars.ofsind][3],vars.hexofs[vars.ofsind][4],
-                                    vars.hexofs[vars.ofsind][5],vars.hexofs[vars.ofsind][6],
+            vars.m = new DeepPointer("UnityPlayer.dll", vars.hexofs[vars.ofsind][0],
+                                    vars.hexofs[vars.ofsind][1], vars.hexofs[vars.ofsind][2],
+                                    vars.hexofs[vars.ofsind][3], vars.hexofs[vars.ofsind][4],
+                                    vars.hexofs[vars.ofsind][5], vars.hexofs[vars.ofsind][6],
                                     vars.hexofs[vars.ofsind][7]).DerefOffsets(game, out Base);
-	        vars.mm = new DeepPointer("mono-2.0-bdwgc.dll", 0x0049D208, 0x198, 0x410, 0x720, 0x100, 0x208, 0x40, 0xC0).DerefOffsets(game, out End);
+            vars.mm = new DeepPointer("mono-2.0-bdwgc.dll", 0x0049D208, 0x198, 0x410, 0x720, 0x100, 0x208, 0x40, 0xC0).DerefOffsets(game, out End);
 
             vars.n = new DeepPointer("UnityPlayer.dll", vars.timerplist[vars.timerind][0],
-                                vars.timerplist[vars.timerind][1],vars.timerplist[vars.timerind][2],
-                                vars.timerplist[vars.timerind][3],vars.timerplist[vars.timerind][4],
-                                vars.timerplist[vars.timerind][5],vars.timerplist[vars.timerind][6],
-                                vars.timerplist[vars.timerind][7],vars.timerplist[vars.timerind][8]).DerefOffsets(game, out TimerBase);
-            
-	        vars.END = End;
+                                vars.timerplist[vars.timerind][1], vars.timerplist[vars.timerind][2],
+                                vars.timerplist[vars.timerind][3], vars.timerplist[vars.timerind][4],
+                                vars.timerplist[vars.timerind][5], vars.timerplist[vars.timerind][6],
+                                vars.timerplist[vars.timerind][7], vars.timerplist[vars.timerind][8]).DerefOffsets(game, out TimerBase);
+
+            vars.END = End;
             vars.Base = Base;
             vars.TimerBase = TimerBase;
-            if (settings["logging"]){
-		        File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+current.timer0.ToString() +","+current.timer1.ToString() +","+current.timer2.ToString() +","+current.timer3.ToString() + '\n');
-                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+vars.currenttimer.ToString("N2")+": START: Timer Base found: "+ vars.TimerBase.ToString("x") + '\n');
-                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+vars.currenttimer.ToString("N2")+": START: Check Base found: "+ vars.Base.ToString("x") + '\n');
-                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+vars.currenttimer.ToString("N2")+": START: end valid?: "+ current.end.ToString() + "||" + current.end2.ToString() + '\n');
+            if (settings["logging"]) {
+                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":  :" + current.timer0.ToString() + "," + current.timer1.ToString() + "," + current.timer2.ToString() + "," + current.timer3.ToString() + '\n');
+                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":  :" + vars.currenttimer.ToString("N2") + ": START: Timer Base found: " + vars.TimerBase.ToString("x") + '\n');
+                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":  :" + vars.currenttimer.ToString("N2") + ": START: Check Base found: " + vars.Base.ToString("x") + '\n');
+                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":  :" + vars.currenttimer.ToString("N2") + ": START: end valid?: " + current.end.ToString() + "||" + current.end2.ToString() + '\n');
             }
-            if (settings["notifications"]){
-                MessageBox.Show("System memory located, program is calibrated for use. \n\nMemory Address: "+vars.Base.ToString("x")+"\n\nDouble-check the level is selected (via Edit Layout>Layout Settings>Scriptable Auto Splitter>Advanced), and that the matching splits are opened :) \n\nHappy running!", "System Calibrated! Lure's Lorned.",MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            if (settings["notifications"]) {
+                MessageBox.Show("System memory located, program is calibrated for use. \n\nMemory Address: " + vars.Base.ToString("x") + "\n\nDouble-check the level is selected (via Edit Layout>Layout Settings>Scriptable Auto Splitter>Advanced), and that the matching splits are opened :) \n\nHappy running!", "System Calibrated! Lure's Lorned.", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
         vars.d = memory.ReadValue<long>((IntPtr)vars.Base);     // get current checkpoint value from memory 
         vars.currenttimer = memory.ReadValue<float>((IntPtr)vars.TimerBase);
-	    vars.end00 = memory.ReadValue<int>((IntPtr)vars.END);
+        vars.end00 = memory.ReadValue<int>((IntPtr)vars.END);
 
-        if (vars.d != vars.d2){                                 //check if checkpoint changed, and if split needed
-            vars.d2 = vars.d;
-            if (settings["logging"]){
-		        
-                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+vars.currenttimer.ToString("N2")+": UPDATE:"+vars.d.ToString() +" activated: next checkpoint: "+
-                vars.splits[vars.Chapter][vars.splitx].ToString()+ '\n');
+        if (vars.d != vars.d2) {                                 //check if checkpoint changed, and if split needed
+            dvar = true;
+            //File.AppendAllText(vars.logs, vars.d.ToString() + vars.d2.ToString() + '\n');
+            if (settings["logging"]) {
+
+                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":  :" + vars.currenttimer.ToString("N2") + ": UPDATE:" + vars.d.ToString() + " activated: next checkpoint: " +
+                vars.splits[vars.Chapter][vars.splitx].ToString() + vars.splitx.ToString()+'\n');
             }
-            if (settings["logging (checkpoints only)"]){
-                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+vars.d.ToString()+"\n");
+            if (settings["logging (checkpoints only)"]) {
+                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":  :" + vars.d.ToString() + "\n");
             }
-            if (vars.d == vars.splits[vars.Chapter][vars.splitx]){ 
+            if (vars.d == vars.splits[vars.Chapter][vars.splitx]) {
                 vars.Split = true;
-                vars.splitx++;
-                if (vars.Chapter == 8){                         // if full run, pause until timer0 resets (new level start)
+                if (vars.splitx < vars.splits[vars.Chapter].Length - 1){
+                    vars.splitx++;
+                }
+                if (vars.Chapter == 8) {                         // if full run, pause until timer0 resets (new level start)
                     vars.fgnore = true;
                     vars.IsLoading = true;
                 }
             }
+            //// solve for skipping 1 checkpoint (test) fix bug // index out of range lmao
+            else if (vars.splitx < vars.splits[vars.Chapter].Length - 1 && vars.Chapter != 8){ 
+                if (vars.d == vars.splits[vars.Chapter][vars.splitx + 1]){
+                    //oops! skipped one?
+                    dvar = false;
+                    vars.Split = true;
+                    vars.splitx++;
+                }
+            }
+	        
+
+	        if (dvar){
+		        vars.d2 = vars.d;
+	        }
+	
         }
 
 	    if (current.end != old.end || vars.end00 != vars.end11){
         	if (current.end == 1 && old.end != 0 || vars.end00 == 1 && vars.end11 != 0){          //check if endscreen is showing > split
         	    vars.Split = true; 
-        	    if (settings["logging"]){
+        	    if (settings["logging"]){ 
         	        File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+vars.currenttimer.ToString("N2")+": END: end trigger activated \n");
         	    }
         	}
@@ -365,7 +387,7 @@ update
             }  
         }   
         vars.oldtimer = vars.currenttimer;
-	vars.end11 = vars.end00;
+	    vars.end11 = vars.end00;
 
     }
     if (!vars.Setup){
